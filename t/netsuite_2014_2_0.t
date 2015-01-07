@@ -8,6 +8,7 @@ use Const::Fast;
 use Test::TempDir::Tiny;
 use WWW::Mechanize::Cached;
 use XML::Compile::WSDL11;
+use XML::Compile::SOAP11;
 use XML::Compile::Transport::SOAPHTTP;
 use XML::CompileX::Schema::Loader;
 
@@ -24,11 +25,7 @@ SKIP: {
         cache => CHI->new( driver => 'File', root_dir => $cache_dir ) );
     my $transport
         = XML::Compile::Transport::SOAPHTTP->new( user_agent => $user_agent );
-    my $wsdl = XML::Compile::WSDL11->new(
-        $user_agent->get($SUITETALK_WSDL)
-            ->decoded_content( ref => 1, raise_error => 1 ),
-        allow_undeclared => 1,
-    );
+    my $wsdl = XML::Compile::WSDL11->new;
 
     my $loader = new_ok(
         'XML::CompileX::Schema::Loader' => [
@@ -112,50 +109,50 @@ SKIP: {
         superbagof(
             map { re(qr/\A urn: $_ [.]webservices[.]netsuite[.]com \z/xms) }
                 qw(
-                accounting_\d{4}_\d+.lists
-                bank_\d{4}_\d+.transactions
-                common_\d{4}_\d+.platform
-                communication_\d{4}_\d+.general
-                core_\d{4}_\d+.platform
-                customers_\d{4}_\d+.transactions
-                customization_\d{4}_\d+.setup
-                demandplanning_\d{4}_\d+.transactions
-                employees_\d{4}_\d+.lists
-                employees_\d{4}_\d+.transactions
-                faults_\d{4}_\d+.platform
-                filecabinet_\d{4}_\d+.documents
-                financial_\d{4}_\d+.transactions
-                general_\d{4}_\d+.transactions
-                inventory_\d{4}_\d+.transactions
-                marketing_\d{4}_\d+.lists
-                messages_\d{4}_\d+.platform
-                purchases_\d{4}_\d+.transactions
-                relationships_\d{4}_\d+.lists
-                sales_\d{4}_\d+.transactions
-                scheduling_\d{4}_\d+.activities
-                supplychain_\d{4}_\d+.lists
-                support_\d{4}_\d+.lists
-                types.accounting_\d{4}_\d+.lists
-                types.common_\d{4}_\d+.platform
-                types.communication_\d{4}_\d+.general
-                types.core_\d{4}_\d+.platform
-                types.customers_\d{4}_\d+.transactions
-                types.customization_\d{4}_\d+.setup
-                types.demandplanning_\d{4}_\d+.transactions
-                types.employees_\d{4}_\d+.lists
-                types.employees_\d{4}_\d+.transactions
-                types.faults_\d{4}_\d+.platform
-                types.filecabinet_\d{4}_\d+.documents
-                types.financial_\d{4}_\d+.transactions
-                types.inventory_\d{4}_\d+.transactions
-                types.marketing_\d{4}_\d+.lists
-                types.purchases_\d{4}_\d+.transactions
-                types.relationships_\d{4}_\d+.lists
-                types.sales_\d{4}_\d+.transactions
-                types.scheduling_\d{4}_\d+.activities
-                types.supplychain_\d{4}_\d+.lists
-                types.support_\d{4}_\d+.lists
-                website_\d{4}_\d+.lists
+                accounting_\d{4}_\d+[.]lists
+                bank_\d{4}_\d+[.]transactions
+                common_\d{4}_\d+[.]platform
+                communication_\d{4}_\d+[.]general
+                core_\d{4}_\d+[.]platform
+                customers_\d{4}_\d+[.]transactions
+                customization_\d{4}_\d+[.]setup
+                demandplanning_\d{4}_\d+[.]transactions
+                employees_\d{4}_\d+[.]lists
+                employees_\d{4}_\d+[.]transactions
+                faults_\d{4}_\d+[.]platform
+                filecabinet_\d{4}_\d+[.]documents
+                financial_\d{4}_\d+[.]transactions
+                general_\d{4}_\d+[.]transactions
+                inventory_\d{4}_\d+[.]transactions
+                marketing_\d{4}_\d+[.]lists
+                messages_\d{4}_\d+[.]platform
+                purchases_\d{4}_\d+[.]transactions
+                relationships_\d{4}_\d+[.]lists
+                sales_\d{4}_\d+[.]transactions
+                scheduling_\d{4}_\d+[.]activities
+                supplychain_\d{4}_\d+[.]lists
+                support_\d{4}_\d+[.]lists
+                types[.]accounting_\d{4}_\d+[.]lists
+                types[.]common_\d{4}_\d+[.]platform
+                types[.]communication_\d{4}_\d+[.]general
+                types[.]core_\d{4}_\d+[.]platform
+                types[.]customers_\d{4}_\d+[.]transactions
+                types[.]customization_\d{4}_\d+[.]setup
+                types[.]demandplanning_\d{4}_\d+[.]transactions
+                types[.]employees_\d{4}_\d+[.]lists
+                types[.]employees_\d{4}_\d+[.]transactions
+                types[.]faults_\d{4}_\d+[.]platform
+                types[.]filecabinet_\d{4}_\d+[.]documents
+                types[.]financial_\d{4}_\d+[.]transactions
+                types[.]inventory_\d{4}_\d+[.]transactions
+                types[.]marketing_\d{4}_\d+[.]lists
+                types[.]purchases_\d{4}_\d+[.]transactions
+                types[.]relationships_\d{4}_\d+[.]lists
+                types[.]sales_\d{4}_\d+[.]transactions
+                types[.]scheduling_\d{4}_\d+[.]activities
+                types[.]supplychain_\d{4}_\d+[.]lists
+                types[.]support_\d{4}_\d+[.]lists
+                website_\d{4}_\d+[.]lists
                 ),
         ) => 'namespaces',
     );

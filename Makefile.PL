@@ -28,9 +28,7 @@ my %WriteMakefileArgs = (
     "Moo" => 0,
     "MooX::Types::MooseLike::Base" => 0,
     "URI" => 0,
-    "XML::Compile::SOAP11" => 0,
     "XML::Compile::SOAP::Util" => 0,
-    "XML::Compile::Transport::SOAPHTTP" => 0,
     "XML::Compile::Util" => 0,
     "XML::Compile::WSDL11" => 0,
     "XML::LibXML" => 0,
@@ -54,10 +52,12 @@ my %WriteMakefileArgs = (
     "Test::TempDir::Tiny" => 0,
     "URI::file" => 0,
     "WWW::Mechanize::Cached" => 0,
+    "XML::Compile::SOAP11" => 0,
+    "XML::Compile::Transport::SOAPHTTP" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }
